@@ -28,5 +28,10 @@ pkgs.gcc10Stdenv.mkDerivation rec {
 	
   ];
 
+  shellHook = ''
+	substituteInPlace op-build --replace '/bin/bash' $(type -p bash)
+	substituteInPlace buildroot/support/dependencies/dependencies.sh --replace '/usr/bin/file' $(type -p file)
+  '';
+
   hardeningDisable = [ "format" ];
 }
